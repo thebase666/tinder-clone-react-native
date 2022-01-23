@@ -59,9 +59,8 @@ export const AuthProvider = ({ children }) => {
   };
 
   const memoedValue = useMemo(
-    () => ({ user, loading, error, logout, signInWithGoogle }),
-    [user, loading, error]
-  );
+    () => ({ user, loading, error, logout, signInWithGoogle })
+    , [user, loading, error]);
 
   return (
     <AuthContext.Provider

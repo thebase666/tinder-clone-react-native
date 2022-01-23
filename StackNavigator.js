@@ -4,6 +4,9 @@ import useAuth from './hooks/useAuth';
 import HomeScreen from './screens/HomeScreen';
 import LoginScreen from './screens/LoginScreen';
 import ChatScreen from './screens/ChatScreen';
+import ModalScreen from './screens/ModalScreen';
+import MatchScreen from './screens/MatchScreen';
+import MessageScreen from './screens/MessageScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -15,8 +18,21 @@ const StackNavigator = () => {
     <Stack.Navigator>
       {user ? (
         <>
-          <Stack.Screen name="Home" component={HomeScreen} />
-          <Stack.Screen name="Chat" component={ChatScreen} />
+          <Stack.Group>
+            <Stack.Screen name="Home" component={HomeScreen} />
+            <Stack.Screen name="Chat" component={ChatScreen} />
+            <Stack.Screen name="Message" component={MessageScreen} />
+          </Stack.Group>
+
+          <Stack.Group screenOptions={{ presentation: 'modal' }}>
+            {/* modal 不是下方弹出的 可能安卓设置不了 */}
+            <Stack.Screen name="Modal" component={ModalScreen} />
+          </Stack.Group>
+
+          <Stack.Group >
+            {/* 这个能显示 高级 */}
+            <Stack.Screen name="Match" component={MatchScreen} />
+          </Stack.Group>
         </>
       ) : (
         <Stack.Screen name="Login" component={LoginScreen} />
